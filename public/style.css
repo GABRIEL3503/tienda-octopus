@@ -5,7 +5,7 @@ body {
   margin: 0;
   background-size: auto;
   background-position: center;
-  font-family: 'Satoshi', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
 
 
 }
@@ -182,7 +182,7 @@ margin-bottom: 88px;}
 
 .item-description {
   font-weight: 500;
-  font-family: "Roboto", sans-serif;
+  font-family: "Nunito Sans", sans-serif;
 ;
   font-size: 48px;
   font-style: normal;
@@ -220,7 +220,7 @@ p {
   font-weight: 700;
   /* font-style: italic; */
   max-width: 80%;
-  font-family: "Roboto", sans-serif;
+  font-family: "Nunito Sans", sans-serif;
   letter-spacing: 2px;
   margin-top: 31px;
   color: #F2F2F2;
@@ -254,7 +254,7 @@ p {
   color: #DFFFFF;
   letter-spacing: -0.5px;
   margin-left: 286px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Nunito Sans", sans-serif;
 ;
 
   font-size: 64px;
@@ -1795,7 +1795,7 @@ input[type="radio"]:checked::before {
   display: none;
   color: #3C3762 !important;
   margin-top: -22px;
-  font-family: 'Satoshi', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
 ;
   font-size: 43px;
 }
