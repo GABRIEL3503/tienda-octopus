@@ -1111,8 +1111,7 @@ footer a {
 }
 
 .social-footer {
-  display: flex
-  ;
+  display: flex;
       gap: 22px;
       align-content: center;
       align-items: center;
