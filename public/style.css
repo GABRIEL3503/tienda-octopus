@@ -1731,9 +1731,8 @@ input[type="radio"]:checked::before {
 }
 
 .group-title {
-  display: none;
   font-size: 6.4rem;
-  color: #3C3762;
+  color: #DFFFFF;
   text-align: center;
   margin-bottom: 1.5rem;
   font-weight: 800;
