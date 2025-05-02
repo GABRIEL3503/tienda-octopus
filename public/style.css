@@ -1200,7 +1200,7 @@ footer a {
   font-size: 38px;
   border: none;
   padding: 18px 28px;
-  border-radius: 60px;
+  border-radius: 20px 20px 20px 0px;
   cursor: pointer;
   z-index: 1000;
 }
