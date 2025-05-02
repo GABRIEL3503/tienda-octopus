@@ -65,11 +65,15 @@ function formatDateArgentina(date, includeTime = true) {
 
 const PARENT_GROUPS = [
   {
-    id: 'seccionunica',
-    title: '',
-    description: ''
+    id: 'Tecnologia',
+    title: 'Tecnología QR',
+    description: '• bla•'
   },
-
+  {
+    id: 'Merchandising',
+    title: 'Merchandising',
+    description: '• bla •'
+  },
 ];
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -547,10 +551,10 @@ document.addEventListener("DOMContentLoaded", function () {
       const groupContainer = document.createElement('div');
       groupContainer.className = 'menu-group';
       groupContainer.setAttribute('data-group', group.id);
-      const hasParallax = group.id === 'seccionunica' || group.id === 'accesorios';
+      const hasParallax = group.id === 'Tecnologia' || group.id === 'accesorios';
       const parallaxHTML = hasParallax ? `
           <div class="parallax-container">
-              <img src="img/Paralax ${group.id === 'seccionunica' ? '1' : '2'} frase.webp">
+              <img src="img/Paralax ${group.id === 'Tecnologia' ? '1' : '2'} frase.webp">
               <h3 class="parallax-text"></h3>
           </div>
         ` : '';
@@ -568,7 +572,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }, {});
     const sections = {};
     menuData.forEach(item => {
-      const parentGroup = item.parent_group || 'seccionunica';
+      const parentGroup = item.parent_group || 'Tecnologia';
       const sectionKey = `${parentGroup}-${item.tipo}`;
 
       if (!sections[sectionKey]) {

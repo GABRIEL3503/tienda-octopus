@@ -204,7 +204,7 @@ function insertMenuItem(nombre, precio, descripcion, tipo, img_url, subelement, 
 
   db.run(
     'INSERT INTO menu_items (nombre, precio, descripcion, tipo, img_url, subelement, parent_group) VALUES (?, ?, ?, ?, ?, ?, ?)',
-    [nombre, precioEntero, descripcion, tipo.toUpperCase(), img_url, subelement, parent_group || 'secion'],
+    [nombre, precioEntero, descripcion, tipo.toUpperCase(), img_url, subelement, parent_group || 'Tecnologia'],
     function (err) {
       if (err) {
         res.status(500).json({ error: err.message });
@@ -308,7 +308,7 @@ baseRouter.put('/api/menu/:id', upload.single('imagen'), async (req, res) => {
         WHERE id = ?`;
       db.run(
         query,
-        [nombre, precioEntero, descripcion, tipo, newImgUrl, parent_group || "seccion", id],
+        [nombre, precioEntero, descripcion, tipo, newImgUrl, parent_group || "Tecnologia", id],
         function (err) {
           if (err) {
             db.run("ROLLBACK");
