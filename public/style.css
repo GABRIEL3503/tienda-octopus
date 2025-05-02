@@ -552,6 +552,7 @@ h2 {
 }
 
 h2 span {
+  letter-spacing: 16px;
   font-family: "Nunito Sans", sans-serif;
 ; font-weight: 300;
   display: flex;
@@ -1731,11 +1732,11 @@ input[type="radio"]:checked::before {
 }
 
 .group-title {
-  font-size: 6.4rem;
+  font-size: 5.9rem;
   color: #DFFFFF;
   text-align: center;
   margin-bottom: 1.5rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 /* Ajustes para el drag and drop */
