@@ -570,58 +570,69 @@ document.addEventListener("DOMContentLoaded", function () {
       containers[group.id] = groupContainer;
       return containers;
     }, {});
-    const sections = {};
-    menuData.forEach(item => {
-      const parentGroup = item.parent_group || 'Tecnologia';
-      const sectionKey = `${parentGroup}-${item.tipo}`;
+   const sectionsMap = {};
 
-      if (!sections[sectionKey]) {
-        const menuSection = document.createElement('div');
-        menuSection.className = 'menu-section';
-        menuSection.setAttribute('data-id', item.section_id);
-        menuSection.setAttribute('data-type', item.tipo);
-        menuSection.innerHTML = `
-          <h2 class="section-title">
-            <span>${capitalizeFirstLetter(item.tipo.toLowerCase())}</span>
-          </h2>
-        `;
+menuData.forEach(item => {
+  const parentGroup = item.parent_group || 'Tecnologia';
+  const sectionKey = `${parentGroup}-${item.tipo}`;
 
-        sections[sectionKey] = menuSection;
-        parentContainers[parentGroup].appendChild(menuSection);
-      }
+  if (!sectionsMap[sectionKey]) {
+    const menuSection = document.createElement('div');
+    menuSection.className = 'menu-section';
+    menuSection.setAttribute('data-id', item.section_id);
+    menuSection.setAttribute('data-type', item.tipo);
+    menuSection.innerHTML = `
+      <h2 class="section-title">
+        <span>${capitalizeFirstLetter(item.tipo.toLowerCase())}</span>
+      </h2>
+    `;
 
-      const newItem = createMenuItem(item);
-      newItem.dataset.id = item.id;
-      newItem.dataset.hidden = item.hidden;
+    sectionsMap[sectionKey] = {
+      parentGroup,
+      element: menuSection,
+      items: []
+    };
+  }
 
-      const menuItem = newItem.querySelector('.menu-item');
+  sectionsMap[sectionKey].items.push(item);
+});
 
-      const buttonsContainer = document.createElement('span');
-      buttonsContainer.className = 'admin-buttons-container';
+Object.entries(sectionsMap).forEach(([_, sectionData]) => {
+  const { parentGroup, element: section, items } = sectionData;
+  parentContainers[parentGroup].appendChild(section);
 
-      const editButton = menuItem.querySelector('.edit-button');
-      if (editButton) buttonsContainer.appendChild(editButton);
+  items.sort((a, b) => a.position - b.position); // 🔥 orden correcto
 
-      const hideShowButton = document.createElement('button');
-      hideShowButton.className = 'hide-show-button auth-required';
-      hideShowButton.textContent = item.hidden ? 'Mostrar' : 'Ocultar';
-      hideShowButton.addEventListener('click', () => toggleVisibility(newItem, hideShowButton));
-      buttonsContainer.appendChild(hideShowButton);
+  items.forEach(item => {
+    const newItem = createMenuItem(item);
+    newItem.dataset.id = item.id;
+    newItem.dataset.hidden = item.hidden;
 
-      menuItem.appendChild(buttonsContainer);
+    const menuItem = newItem.querySelector('.menu-item');
 
-      if (item.hidden) {
-        newItem.style.display = isAuthenticated ? 'block' : 'none';
-        newItem.style.opacity = isAuthenticated ? '0.3' : '1';
-      }
+    const buttonsContainer = document.createElement('span');
+    buttonsContainer.className = 'admin-buttons-container';
 
-      // Insertar como primer hijo visible después del título
-      const section = sections[sectionKey];
-      const afterTitle = section.querySelector('h2.section-title')?.nextSibling;
-      section.insertBefore(newItem, afterTitle || null);
+    const editButton = menuItem.querySelector('.edit-button');
+    if (editButton) buttonsContainer.appendChild(editButton);
 
+    const hideShowButton = document.createElement('button');
+    hideShowButton.className = 'hide-show-button auth-required';
+    hideShowButton.textContent = item.hidden ? 'Mostrar' : 'Ocultar';
+    hideShowButton.addEventListener('click', () => toggleVisibility(newItem, hideShowButton));
+    buttonsContainer.appendChild(hideShowButton);
 
-    });
+    menuItem.appendChild(buttonsContainer);
+
+    if (item.hidden) {
+      newItem.style.display = isAuthenticated ? 'block' : 'none';
+      newItem.style.opacity = isAuthenticated ? '0.3' : '1';
+    }
+
+    section.appendChild(newItem);
+  });
+});
+
 
     checkAuthentication();
     const tipo = localStorage.getItem('lastCreatedItemTipo');
